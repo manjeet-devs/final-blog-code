@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FiUser, FiMessageSquare } from "react-icons/fi";
+import ToggleSwitch from "../components/ToggleSwitch";
 
 const UserPostCommentList = () => {
   const [comments, setComments] = useState([
@@ -53,12 +54,13 @@ const UserPostCommentList = () => {
                 </td>
                 <td className="p-2 text-gray-800 dark:text-white hidden sm:table-cell">{comment.date}</td>
                 <td className="p-2 text-gray-800 dark:text-white">
-                  <button 
+                  {/* <button 
                     onClick={() => toggleEnable(comment.id)} 
                     className={`px-3 py-1 rounded-lg text-white ${comment.enabled ? 'bg-green-500' : 'bg-red-500'}`}
                   >
                     {comment.enabled ? 'Enabled' : 'Disabled'}
-                  </button>
+                  </button> */}
+                  <ToggleSwitch />
                 </td>
               </tr>
             ))}
