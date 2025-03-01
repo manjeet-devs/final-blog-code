@@ -25,7 +25,7 @@ function FrontApp() {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>; // ✅ Fixed condition
+        return <div>Loading...</div>;
     }
 
     return (
