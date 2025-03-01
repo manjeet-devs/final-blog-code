@@ -14,7 +14,7 @@ const Header = () => {
         <Search size={18} className="text-gray-500" />
         <input
           type="text"
-          placeholder="Search Reddit"
+          placeholder="Search Blog"
           className="bg-transparent outline-none px-2 w-full"
         />
       </div>

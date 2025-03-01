@@ -1,4 +1,4 @@
-import appwrite from "../services/appwriteConfig.js";
+import appwrite from "../../services/appwriteConfig.js";
 
 export default async function fetchData() {
       try {

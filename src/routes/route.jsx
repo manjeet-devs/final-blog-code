@@ -1,8 +1,12 @@
 import components from "../front/pages/index.js";
-import getSeo from "./seoUrl.js"
+// import getSeo from "../models/appWriteService/seoUrl.js"
 
 const RoutesComponent = async () => {
-    const seoData = await getSeo();
+    // if(import.meta.env.VITE_APPWRITE_SERVICE){
+    //     const seoData = await getSeo();
+    // }else{
+    //     const seoData = ""
+    // }
     return [
         { path: "/", element: <components.HomePage /> },
         { path: "/services", element: <components.ServicesPage /> },
