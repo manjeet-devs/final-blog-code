@@ -9,7 +9,7 @@ const RoutesComponent = async () => {
         { path: "/about", element: <components.AboutPage /> },
         { path: "/contact", element: <components.ContactPage /> },
         { path: "/static/:id", element: <components.StaticPage /> },
-        { path: "/product/:id", element: <components.ProductPage /> },
+        { path: "/login", element: <components.LoginPage /> },
         { path: "/category/:id", element: <components.CategoryPage /> },
         { path: "/:path", element: <components.SetComponent /> }
     ];
