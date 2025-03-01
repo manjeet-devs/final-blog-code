@@ -15,7 +15,7 @@ const SetComponent = () => {
         async function fetchSeoUrls() {
             console.log(modelServe);
             try {
-                const seo = (modelServe == true) ? await getSeo() : [{"hi":"hiiiii"}];
+                const seo = (modelServe === "true") ? await getSeo() : [{"hi":"hiiiii"}];
                 console.log("reached...", seo);
                 setSeoRoutes(seo);
             } catch (error) {
@@ -32,7 +32,6 @@ const SetComponent = () => {
         if (!loading) {
             let matchedRoute = null;
             seoRoutes.forEach((item) => {
-                console.log(item.url, path);
 
                 if (item.url == path) {
                     matchedRoute = item.file;
