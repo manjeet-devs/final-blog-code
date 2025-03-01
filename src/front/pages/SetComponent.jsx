@@ -5,6 +5,7 @@ import NotFound from "./NotFoundPage";
 import StaticPage from "./StaticPage";
 import CategoryPage from "./CategoryPage";
 import getSeo from "../index.js";
+// import getSeo from "../../routes/seoUrl.js"
 
 const SetComponent = () => {  
   const { path } = useParams();  

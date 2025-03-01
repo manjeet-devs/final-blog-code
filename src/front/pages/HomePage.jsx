@@ -1,140 +1,111 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, incrementByAmount } from '../features/counterSlice';
-
+import Slider from "react-slick";
+import { ArrowUp, MessageCircle } from "lucide-react";
+import LatestBlogCard from '../components/LatestBlogCard';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const HomePage = () => {
-  // State for the banner slider
-  const count = useSelector((state) => state.counter.value);
-
-  // Dispatch actions
-  const dispatch = useDispatch();
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const bannerImages = [
-    'https://cloud.appwrite.io/v1/storage/buckets/675d7a46003c9e8578cf/files/679602b9002034f0b8f0/view?project=675d44c90034f17d6493&project=675d44c90034f17d6493&mode=admin',
-    'https://cloud.appwrite.io/v1/storage/buckets/675d7a46003c9e8578cf/files/679602b9002034f0b8f0/view?project=675d44c90034f17d6493&project=675d44c90034f17d6493&mode=admin',
-    'https://cloud.appwrite.io/v1/storage/buckets/675d7a46003c9e8578cf/files/679602b9002034f0b8f0/view?project=675d44c90034f17d6493&project=675d44c90034f17d6493&mode=admin',
-  ];
-
-  const products = [
+  const initialPosts = [
     {
       id: 1,
-      name: 'Product 1',
-      image: 'https://via.placeholder.com/300x300.png?text=Product+1',
-      price: '$19.99',
+      title: "Getting Started with React",
+      description: "React is a JavaScript library for building user interfaces...",
+      subreddit: "reactjs",
+      upvotes: 120,
+      comments: 534,
+      image: "https://via.placeholder.com/1200x600",
     },
     {
       id: 2,
-      name: 'Product 2',
-      image: 'https://via.placeholder.com/300x300.png?text=Product+2',
-      price: '$29.99',
+      title: "Tailwind CSS vs Bootstrap: Which is Better?",
+      description: "Tailwind CSS is a utility-first framework...",
+      subreddit: "webdev",
+      upvotes: 95,
+      comments: 420,
+      image: "https://via.placeholder.com/1200x600",
     },
     {
       id: 3,
-      name: 'Product 3',
-      image: 'https://via.placeholder.com/300x300.png?text=Product+3',
-      price: '$39.99',
+      title: "Understanding Redux: A Beginner’s Guide",
+      description: "Redux helps manage state in large applications...",
+      subreddit: "javascript",
+      upvotes: 150,
+      comments: 740,
+      image: "https://via.placeholder.com/1200x600",
     },
   ];
 
-  // Banner slider navigation
-  const nextSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide + 1) % bannerImages.length);
+  const [posts, setPosts] = useState(initialPosts);
+  const [visiblePosts, setVisiblePosts] = useState(2);
+
+  const loadMorePosts = () => {
+    setVisiblePosts((prevVisible) => prevVisible + 2);
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? bannerImages.length - 1 : prevSlide - 1
-    );
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    autoplay: true,
+    autoplaySpeed: 1000,
   };
 
   return (
-    <div className="bg-gray-100">
-      {/* Banner Slider */}
-      <section className="relative">
-        <div className="overflow-hidden">
-          <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{
-              transform: `translateX(-${currentSlide * 100}%)`,
-            }}
-          >
-            {bannerImages.map((image, index) => (
-              <div key={index} className="flex-shrink-0 w-full">
-                <img src={image} alt={`Banner ${index + 1}`} className="w-full h-96 object-cover" />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white">
-          <button onClick={prevSlide} className="bg-gray-800 p-2 rounded-full hover:bg-gray-600">
-            &#10094;
-          </button>
-        </div>
-        <div className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white">
-          <button onClick={nextSlide} className="bg-gray-800 p-2 rounded-full hover:bg-gray-600">
-            &#10095;
-          </button>
-        </div>
-      </section>
-
-      {/* Product Listing */}
-      <section className="py-12">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-semibold mb-8">Featured Products</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <Link to={`/static/static${product.id}`} className="hover:text-gray-400">
-                <div key={product.id} className="bg-white p-4 rounded-lg shadow-lg">
-                  <img src={product.image} alt={product.name} className="w-full h-48 object-cover mb-4 rounded-lg" />
-                  <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                  <p className="text-gray-600 mb-4">{product.price}</p>
-                  <button className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500">
-                    Add to Cart
-                  </button>
-                </div>
-               </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="flex flex-col items-center justify-center bg-gray-100">
-      <div className="bg-white shadow-lg rounded-xl p-6 flex flex-col items-center space-y-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Counter</h2>
-        
-        <div className="flex items-center space-x-4">
-          <button
-            className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition"
-            aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
-          >
-            -
-          </button>
-          
-          <span className="text-3xl font-bold text-gray-800">{count}</span>
-
-          <button
-            className="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition"
-            aria-label="Increment value"
-            onClick={() => dispatch(increment())}
-          >
-            +
-          </button>
-        </div>
-
-        <button
-          className="mt-4 px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
-          aria-label="Increment by 5"
-          onClick={() => dispatch(incrementByAmount(5))}
-        >
-          Increment by 5
-        </button>
+    <div className="max-w-4xl mx-auto p-4">
+      {/* Slider for Latest Blog Cards */}
+      <div className=' '>
+      <Slider {...sliderSettings} className="p-3 mb-10">
+        <LatestBlogCard title="Exploring React Best Practices" excerpt="Discover the essential techniques..." image="https://source.unsplash.com/400x300/?technology,blog" author="John Doe" date="Feb 26, 2025" />
+        <LatestBlogCard title="Mastering Tailwind CSS" excerpt="Learn how to make the most of Tailwin." image="https://source.unsplash.com/400x300/?design,css" author="Jane Smith" date="Feb 27, 2025" />
+        <LatestBlogCard title="Mastering Tailwind CSS" excerpt="Learn how to make the most of Tailwin." image="https://source.unsplash.com/400x300/?design,css" author="Jane Smith" date="Feb 27, 2025" />
+        <LatestBlogCard title="Mastering Tailwind CSS" excerpt="Learn how to make the most of Tailwin." image="https://source.unsplash.com/400x300/?design,css" author="Jane Smith" date="Feb 27, 2025" />
+        <LatestBlogCard title="Mastering Tailwind CSS" excerpt="Learn how to make the most of Tailwin." image="https://source.unsplash.com/400x300/?design,css" author="Jane Smith" date="Feb 27, 2025" />
+        <LatestBlogCard title="Mastering Tailwind CSS" excerpt="Learn how to make the most of Tailwin." image="https://source.unsplash.com/400x300/?design,css" author="Jane Smith" date="Feb 27, 2025" />
+        <LatestBlogCard title="The Future of JavaScript" excerpt="Explore what's coming next in Jat..." image="https://source.unsplash.com/400x300/?javascript,code" author="Alex Brown" date="Feb 28, 2025" />
+      </Slider>
       </div>
-    </div>
 
+
+      {/* Blog Posts */}
+      <div className="space-y-6">
+        {posts.slice(0, visiblePosts).map((post) => (
+          <div key={post.id} className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+            <img src={post.image} alt={post.title} className="w-full h-64 object-cover rounded-md mb-6" />
+            <div className="flex items-start gap-6">
+              <div className="flex flex-col items-center">
+                <button className="text-gray-500 hover:text-red-500">
+                  <ArrowUp size={24} />
+                </button>
+                <span className="text-lg font-bold">{post.upvotes}</span>
+              </div>
+              <div className="flex-1">
+                <Link to={`/r/${post.subreddit}`} className="text-sm text-blue-500">r/{post.subreddit}</Link>
+                <Link to={`/post/${post.id}`} className="block text-2xl font-semibold hover:underline">
+                  {post.title}
+                </Link>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">{post.description}</p>
+                <div className="mt-4 flex items-center text-gray-500">
+                  <MessageCircle size={20} className="mr-2" />
+                  <span className="text-md">{post.comments} Comments</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Load More Button */}
+      {visiblePosts < posts.length && (
+        <div className="text-center mt-6">
+          <button onClick={loadMorePosts} className="px-5 py-3 bg-blue-500 text-white text-lg rounded-lg hover:bg-blue-600">
+            Load More
+          </button>
+        </div>
+      )}
     </div>
   );
 };
