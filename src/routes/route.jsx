@@ -11,6 +11,7 @@ const RoutesComponent = async () => {
         { path: "/register", element: <components.RegisterPage /> },
         { path: "/blog/:id", element: <components.CategoryPage /> },
         { path: "/:path", element: <components.SetComponent /> }
+        // { path: "/:path", element: <components.ArticlePage /> }
     ];
 };
 
