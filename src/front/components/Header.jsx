@@ -14,13 +14,13 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className="hidden ml-50 md:flex items-center gap-6">
-          <Link to="/" className="hover:text-gray-600">Home</Link>
+          <Link to="/" className="hover:text-gray-600 px-3 py-1 font-semibold rounded-full dark:bg-gray-800 dark:text-gray-100">HOME</Link>
 
           {/* Blog Dropdown */}
           <div className="relative">
             <button 
               onClick={() => setBlogDropdownOpen(!blogDropdownOpen)} 
-              className="flex items-center gap-1 hover:text-gray-600"
+              className="flex items-center gap-1 hover:text-gray-600 px-3 py-1 font-semibold rounded-full dark:bg-gray-800 dark:text-gray-100"
             >
               Blog <ChevronDown size={16} />
             </button>
@@ -33,8 +33,8 @@ const Header = () => {
             )}
           </div>
 
-          <Link to="/about" className="hover:text-gray-600">About</Link>
-          <Link to="/services" className="hover:text-gray-600">Services</Link>
+          <Link to="/about" className="hover:text-gray-600 px-3 py-1 font-semibold rounded-full dark:bg-gray-800 dark:text-gray-100">About</Link>
+          <Link to="/services" className="hover:text-gray-600 px-3 py-1 font-semibold rounded-full dark:bg-gray-800 dark:text-gray-100">Services</Link>
         </nav>
       </div>
 
@@ -80,13 +80,13 @@ const Header = () => {
 
           {/* Mobile Navigation */}
           <nav className="flex flex-col text-center">
-            <Link to="/" className="py-2 hover:bg-gray-100" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+            <Link to="/" className="hover:text-gray-600 px-3 py-1 font-semibold rounded-full dark:bg-gray-800 dark:text-gray-100" onClick={() => setMobileMenuOpen(false)}>Home</Link>
 
             {/* Blog Dropdown (Mobile) */}
             <div className="relative">
               <button 
                 onClick={() => setBlogDropdownOpen(!blogDropdownOpen)} 
-                className="w-full py-2 flex justify-center items-center hover:bg-gray-100"
+                className="w-full py-2 flex justify-center items-center hover:text-gray-600 px-3 py-1 font-semibold rounded-full dark:bg-gray-800 dark:text-gray-100"
               >
                 Blog <ChevronDown size={16} className="ml-1" />
               </button>
@@ -99,8 +99,8 @@ const Header = () => {
               )}
             </div>
 
-            <Link to="/about" className="py-2 hover:bg-gray-100" onClick={() => setMobileMenuOpen(false)}>About</Link>
-            <Link to="/services" className="py-2 hover:bg-gray-100" onClick={() => setMobileMenuOpen(false)}>Services</Link>
+            <Link to="/about" className="py-2 hover:text-gray-600 px-3 py-1 font-semibold rounded-full dark:bg-gray-800 dark:text-gray-100" onClick={() => setMobileMenuOpen(false)}>About</Link>
+            <Link to="/services" className="py-2 hover:text-gray-600 px-3 py-1 font-semibold rounded-full dark:bg-gray-800 dark:text-gray-100" onClick={() => setMobileMenuOpen(false)}>Services</Link>
           </nav>
         </div>
       )}
