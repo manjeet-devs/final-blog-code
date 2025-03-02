@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NotFound from "./NotFoundPage";
+import ArticlePage from "./ArticlePage";
 import getSeo from "../../models/appWriteService/seoUrl.js"
 
 const SetComponent = () => {
@@ -44,7 +45,7 @@ const SetComponent = () => {
     if (loading) return <div>Loading...</div>;
     return (
         <>
-            {isSeoUrl === 'article' ? <NotFound /> :
+            {isSeoUrl === 'article' ? <ArticlePage /> :
                 isSeoUrl === 'category' ? <NotFound /> :
                     isSeoUrl === 'static' ? <NotFound /> :
                         <NotFound />}
