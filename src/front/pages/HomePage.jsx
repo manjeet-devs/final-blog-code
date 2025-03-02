@@ -111,7 +111,10 @@ const HomePage = () => {
 
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="">
+      <div className="w-full h-100 mb-5 bg-cover bg-center rounded-lg mt-10" >
+        <img className="w-full h-100 object-cover" src="https://cdn.anscommerce.com/catalog/brandstore/Columbia/623-1740767400-promo-banner-march-25.jpg" alt="" />
+      </div>
       {/* Slider for Latest Blog Cards */}
       {/* <div className=' '>
       <Slider {...sliderSettings} className="p-3 mb-10">
@@ -127,7 +130,7 @@ const HomePage = () => {
 
 
       {/* Blog Posts */}
-      <div className="space-y-6">
+      <div className="space-y-6 max-w-6xl mx-auto p-4">
         {posts.slice(0, visiblePosts).map((post) => (
           <BlogPostCard
             key={post.id}
@@ -145,7 +148,7 @@ const HomePage = () => {
 
       {/* Load More Button */}
       {visiblePosts < posts.length && (
-        <div className="text-center mt-6">
+        <div className="text-center mt-2 mb-2">
           <button onClick={loadMorePosts} className="px-5 py-3 bg-blue-500 text-white text-lg rounded-lg hover:bg-blue-600">
             Load More
           </button>

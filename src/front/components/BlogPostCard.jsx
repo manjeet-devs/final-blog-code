@@ -4,7 +4,7 @@ import { ArrowUp, MessageCircle, Calendar } from "lucide-react";
 
 const BlogPostCard = ({ id, title, description, subreddit, upvotes, comments, image, date }) => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 w-full">
       <img src={image} alt={title} className="w-full h-64 object-cover rounded-md mb-6" />
       <div className="flex items-start gap-6">
         <div className="flex flex-col items-center">
