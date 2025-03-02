@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 function Footer(){
   return (
@@ -18,10 +19,10 @@ function Footer(){
           <div>
             <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="#home" className="hover:text-gray-400">Home</a></li>
-              <li><a href="#about" className="hover:text-gray-400">About</a></li>
-              <li><a href="#services" className="hover:text-gray-400">Services</a></li>
-              <li><a href="#contact" className="hover:text-gray-400">Contact</a></li>
+              <li><Link to="/" className="hover:text-blue-600">Home</Link></li>
+              <li><Link to="/about" className="hover:text-blue-600">About</Link></li>
+              <li><Link to="/services" className="hover:text-blue-600">Services</Link></li>
+              <li><Link to="/contact" className="hover:text-blue-600">Contact</Link></li>
             </ul>
           </div>
 
@@ -29,17 +30,17 @@ function Footer(){
           <div>
             <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">Facebook</a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">Twitter</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">LinkedIn</a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">Instagram</a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600">Facebook</a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600">Twitter</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600">LinkedIn</a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600">Instagram</a>
             </div>
           </div>
 
           {/* Newsletter Signup */}
           <div>
             <h3 className="text-xl font-semibold mb-4">Subscribe</h3>
-            <p className="text-gray-400 mb-4">Get the latest updates from our company.</p>
+            <p className="">Get the latest updates from our company.</p>
             <form>
               <input
                 type="email"

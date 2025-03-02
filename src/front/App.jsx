@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import getRoutes from "../routes/route";
-import Sidebar from "./components/Sidebar";
 import "./style/stylesheet.css";
 
 function FrontApp() {
@@ -34,8 +33,7 @@ function FrontApp() {
                 
                 <div className="flex-1">
                     <Header toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-                    <main className=" flex p-4 ">
-                        {/* <Sidebar isOpen={sidebarOpen} /> */}
+                    <main className="flex justify-center">
                         <Routes>
                             {routes.map((route, index) => (
                                 <Route key={index} path={route.path} element={route.element} />
