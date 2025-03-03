@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { Bell, MessageCircle, Search, User, Menu, X, ChevronDown } from "lucide-react";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [blogDropdownOpen, setBlogDropdownOpen] = useState(false);
 

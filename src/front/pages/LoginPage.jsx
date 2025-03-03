@@ -1,7 +1,27 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, {useState} from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+// import { loginSuccess } from "../redux/slice/authSlice";
 
 const LoginPage = () => {
+
+    const [formData, setFormData] = useState({ email: "", password: "" });
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+  
+    const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  
+    // const handleSubmit = async (e) => {
+    //   e.preventDefault();
+    //   try {
+    //     const { data } = await loginUser(formData);
+    //     dispatch(loginSuccess(data));
+    //     navigate("/");
+    //   } catch (error) {
+    //     alert(error.response.data.message);
+    //   }
+    // };
+  
     return (
         <div className="space-y-6 max-w-2xl mx-auto p-4 mt-10 mb-10">
             <div className=" p-6  bg-white rounded-lg shadow-md  dark:bg-gray-100 dark:text-gray-800">
@@ -9,7 +29,7 @@ const LoginPage = () => {
                     <h1 className="my-3 text-3xl sm:text-4xl font-bold">Sign in</h1>
                     <p className="text-sm dark:text-gray-600">Sign in to access your account</p>
                 </div>
-                <form noValidate className="space-y-6">
+                <form onSubmit={handleSubmit}  className="space-y-6">
                     <div className="space-y-4">
                         {/* Email Input */}
                         <div>
@@ -18,6 +38,7 @@ const LoginPage = () => {
                                 type="email" 
                                 name="email" 
                                 id="email" 
+                                onChange={handleChange} 
                                 placeholder="leroy@jenkins.com" 
                                 className="w-full px-3 py-2 border rounded-md focus:ring focus:ring-violet-400 focus:border-violet-500 dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
                             />
@@ -35,6 +56,7 @@ const LoginPage = () => {
                                 type="password" 
                                 name="password" 
                                 id="password" 
+                                onChange={handleChange} 
                                 placeholder="*****" 
                                 className="w-full px-3 py-2 border rounded-md focus:ring focus:ring-violet-400 focus:border-violet-500 dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
                             />

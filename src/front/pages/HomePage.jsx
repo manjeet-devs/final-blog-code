@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { ArrowUp, MessageCircle } from "lucide-react";
@@ -67,6 +67,11 @@ const HomePage = () => {
 
   const [posts, setPosts] = useState(initialPosts);
   const [visiblePosts, setVisiblePosts] = useState(2);
+
+  // useEffect(() => {
+  //   dispatch(fetchUser()); 
+  // }, [dispatch]);
+
 
   const loadMorePosts = () => {
     setVisiblePosts((prevVisible) => prevVisible + 2);

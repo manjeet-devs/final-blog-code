@@ -10,8 +10,8 @@ const RoutesComponent = async () => {
         { path: "/login", element: <components.LoginPage /> },
         { path: "/register", element: <components.RegisterPage /> },
         { path: "/blog/:id", element: <components.CategoryPage /> },
-        { path: "/:path", element: <components.SetComponent /> }
-        // { path: "/:path", element: <components.ArticlePage /> }
+        // { path: "/:path", element: <components.SetComponent /> }
+        { path: "/:path", element: <components.ArticlePage /> }
     ];
 };
 
