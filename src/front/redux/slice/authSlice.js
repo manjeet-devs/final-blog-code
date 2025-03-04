@@ -6,13 +6,23 @@ const API_URL = "http://localhost:5000/api";
 // **Login User and Set Cookie**
 export const loginUser = createAsyncThunk("auth/loginUser", async (credentials, { rejectWithValue }) => {
   try {
-    await axios.post(`${API_URL}/login`, credentials, { withCredentials: true }); // 🔥 Backend sets HTTP-only cookie
-    const response = await axios.get(`${API_URL}/user`, { withCredentials: true }); // Fetch user after login
-    return response.data.user;
+    const response = await axios.post(`${API_URL}/auth/login`, credentials, { withCredentials: true }); // 🔥 Backend sets HTTP-only cookie
+    // const response = await axios.get(`${API_URL}/user`, { withCredentials: true }); // Fetch user after login
+    return response.data;
   } catch (error) {
     return rejectWithValue(error.response?.data?.error || "Login failed");
   }
 });
+// **Login User and Set Cookie**
+export const registerUser = createAsyncThunk("auth/registerUser", async (credentials, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${API_URL}/auth/register`, credentials, { withCredentials: true }); // 🔥 Backend sets HTTP-only cookie
+      // const response = await axios.get(`${API_URL}/user`, { withCredentials: true }); // Fetch user after login
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.error || "Login failed");
+    }
+  });
 
 // **Fetch User from Cookie**
 export const fetchUser = createAsyncThunk("auth/fetchUser", async () => {
@@ -26,7 +36,7 @@ export const fetchUser = createAsyncThunk("auth/fetchUser", async () => {
 
 // **Logout - Clear Cookie**
 export const logoutUser = createAsyncThunk("auth/logout", async () => {
-  await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
+  await axios.post(`${API_URL}/auth/logout`, {}, { withCredentials: true });
 });
 
 const authSlice = createSlice({

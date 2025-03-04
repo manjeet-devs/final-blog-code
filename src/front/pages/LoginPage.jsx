@@ -1,26 +1,31 @@
 import React, {useState} from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-// import { loginSuccess } from "../redux/slice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../redux/slice/authSlice";
 
 const LoginPage = () => {
 
     const [formData, setFormData] = useState({ email: "", password: "" });
     const dispatch = useDispatch();
     const navigate = useNavigate();
-  
+    const { error, isAuthenticated } = useSelector((state) => state.auth);
+
+
+
+
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   
-    // const handleSubmit = async (e) => {
-    //   e.preventDefault();
-    //   try {
-    //     const { data } = await loginUser(formData);
-    //     dispatch(loginSuccess(data));
-    //     navigate("/");
-    //   } catch (error) {
-    //     alert(error.response.data.message);
-    //   }
-    // };
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const result = await dispatch(loginUser(formData));
+        if (!result.error) {
+            navigate("/");
+        }
+      } catch (error) {
+        alert(error.response.data.message);
+      }
+    };
   
     return (
         <div className="space-y-6 max-w-2xl mx-auto p-4 mt-10 mb-10">

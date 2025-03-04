@@ -1,25 +1,33 @@
 import { Link } from "react-router-dom";
 import { Bell, MessageCircle, Search, User, Menu, X, ChevronDown } from "lucide-react";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { appObj } from "../redux/slice/appSlice";
+import { logoutUser } from "../redux/slice/authSlice";
 
 const Header = () => {
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [blogDropdownOpen, setBlogDropdownOpen] = useState(false);
+  const { error, isAuthenticated } = useSelector((state) => state.auth);
 
+ useEffect(() => {
+    dispatch(appObj());    
+  }, [isAuthenticated]);
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between bg-white p-3 border-b border-gray-400 shadow-md dark:bg-gray-300">
-      {/* Left: Logo & Navigation */}
       <div className="flex items-center gap-6">
         <Link to="/" className="text-xl font-bold text-gray-900">LOGO</Link>
         
-        {/* Desktop Navigation */}
         <nav className="hidden ml-50 md:flex items-center gap-6">
           <Link to="/" className="hover:text-gray-600 px-3 py-1 font-semibold rounded-full dark:bg-gray-800 dark:text-gray-100">HOME</Link>
 
-          {/* Blog Dropdown */}
           <div className="relative">
             <button 
               onClick={() => setBlogDropdownOpen(!blogDropdownOpen)} 
@@ -56,8 +64,11 @@ const Header = () => {
         {/* Notifications & Login */}
         <MessageCircle size={20} className="cursor-pointer md:block mr-5" />
         <Link to="/login" className="flex items-center bg-gray-100 p-2 rounded-lg hover:bg-gray-200">
-          <User size={18} /> Login
+          <User size={18} /> {isAuthenticated ? "Logged In" : "Not Logged In"}
         </Link>
+        <button onClick={handleLogout} className="flex items-center bg-gray-100 p-2 rounded-lg hover:bg-gray-200">
+          <User size={18} /> {isAuthenticated ? "LogOut" : "Sign Up"}
+        </button>
 
         {/* Mobile Menu Button */}
         <button 

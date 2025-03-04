@@ -16,7 +16,7 @@ export const fetchArticles = createAsyncThunk("articles/fetchArticles", async ()
 // **Fetch Single Article**
 export const fetchArticleById = createAsyncThunk("articles/fetchArticleById", async (id, { rejectWithValue }) => {
   try {
-    const response = await axios.get(`${API_URL}/article/${id}`);
+    const response = await axios.get(`${API_URL}/article/${id}`, { withCredentials: true });
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response?.data?.error || "Article not found");
