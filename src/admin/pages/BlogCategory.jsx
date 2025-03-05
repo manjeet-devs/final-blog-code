@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories, deleteCategory } from "../redux/slice/categorySlice";
 
 const BlogCategory = () => {
   const [blogCategories, setBlogCategories] = useState([]);

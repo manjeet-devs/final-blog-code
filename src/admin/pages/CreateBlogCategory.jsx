@@ -1,60 +1,58 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createCategory } from "../redux/slice/categorySlice";
 
 export default function NewCategoryForm() {
-  const [categoryName, setCategoryName] = useState("");
-  const [slug, setSlug] = useState("");
-  const [metaTitle, setMetaTitle] = useState("");
-  const [metaDescription, setMetaDescription] = useState("");
-  const [parentCategory, setParentCategory] = useState("");
-  const [status, setStatus] = useState("active");
-  const [featureImage, setFeatureImage] = useState(null);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const dispatch = useDispatch();
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    setFeatureImage(file);
+  // 🔹 State for form fields
+  const [categoryData, setCategoryData] = useState({
+    name: "",
+    slug: "",
+    metaTitle: "",
+    metaDescription: "",
+    parentName: "",
+    status: "active",
+    featureImage: null, // For file upload
+  });
+
+  // 🔹 Handle input change
+  const handleChange = (e) => {
+     setCategoryData({ ...categoryData, [e.target.name]: e.target.value }); 
+    };
+
+  // 🔹 Handle file upload
+  const handleFileChange = (e) => {
+    setCategoryData({ ...categoryData, featureImage: e.target.files[0] });
   };
 
+  // 🔹 Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Dispatch action to create category
+    dispatch(createCategory(categoryData));
 
-    if (!categoryName.trim()) {
-      setError("Category name is required.");
-      return;
-    }
-
-    // Simulate category submission (Replace with Appwrite API later)
-    console.log({
-      categoryName,
-      slug,
-      metaTitle,
-      metaDescription,
-      parentCategory,
-      status,
-      featureImage,
+    // Clear form fields
+    setCategoryData({
+      name: "",
+      slug: "",
+      metaTitle: "",
+      metaDescription: "",
+      parentCategory: "",
+      status: "active",
+      featureImage: null,
     });
-
-    // Reset state
-    setCategoryName("");
-    setSlug("");
-    setMetaTitle("");
-    setMetaDescription("");
-    setParentCategory("");
-    setStatus("active");
-    setFeatureImage(null);
-    setError("");
-    setSuccess("Category added successfully!");
-
-    setTimeout(() => setSuccess(""), 3000); // Clear success message after 3 seconds
   };
+
+
 
   return (
     <div className=" mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg">
       <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">Add New Category</h2>
 
-      {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-      {success && <p className="text-green-500 text-sm mb-2">{success}</p>}
+      {/* {error && <p className="text-red-500 text-sm mb-2">{error}</p>} */}
+      {/* {success && <p className="text-green-500 text-sm mb-2">{success}</p>} */}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Category Name */}
@@ -64,8 +62,9 @@ export default function NewCategoryForm() {
             type="text"
             className="w-full p-2 border rounded-lg dark:bg-gray-900 dark:border-gray-600 dark:text-white focus:outline-none focus:ring focus:ring-purple-500"
             placeholder="Enter category name"
-            value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
+            name="name"
+            value={categoryData.name}
+            onChange={handleChange}
           />
         </div>
 
@@ -76,8 +75,9 @@ export default function NewCategoryForm() {
             type="text"
             className="w-full p-2 border rounded-lg dark:bg-gray-900 dark:border-gray-600 dark:text-white focus:outline-none focus:ring focus:ring-purple-500"
             placeholder="category-name"
-            value={slug}
-            onChange={(e) => setSlug(e.target.value)}
+            name="slug"
+            value={categoryData.slug}
+            onChange={handleChange}
           />
         </div>
 
@@ -86,8 +86,9 @@ export default function NewCategoryForm() {
           <label className="block text-gray-700 dark:text-gray-300 font-medium mb-1">Parent Category</label>
           <select
             className="w-full p-2 border rounded-lg dark:bg-gray-900 dark:border-gray-600 dark:text-white focus:outline-none focus:ring focus:ring-purple-500"
-            value={parentCategory}
-            onChange={(e) => setParentCategory(e.target.value)}
+            value={categoryData.parentName}
+            onChange={handleChange}
+            name="parentName"
           >
             <option value="">None (Top-Level Category)</option>
             <option value="technology">Technology</option>
@@ -104,8 +105,9 @@ export default function NewCategoryForm() {
             type="text"
             className="w-full p-2 border rounded-lg dark:bg-gray-900 dark:border-gray-600 dark:text-white focus:outline-none focus:ring focus:ring-purple-500"
             placeholder="Best Tech News in 2025"
-            value={metaTitle}
-            onChange={(e) => setMetaTitle(e.target.value)}
+            name="metaTitle"
+            value={categoryData.metaTitle}
+            onChange={handleChange}
           />
         </div>
 
@@ -116,33 +118,39 @@ export default function NewCategoryForm() {
             className="w-full p-2 border rounded-lg dark:bg-gray-900 dark:border-gray-600 dark:text-white focus:outline-none focus:ring focus:ring-purple-500"
             placeholder="This category contains the latest updates in technology..."
             rows="3"
-            value={metaDescription}
-            onChange={(e) => setMetaDescription(e.target.value)}
+            name="metaDescription"
+            value={categoryData.metaDescription}
+            onChange={handleChange}
           ></textarea>
         </div>
 
         {/* Status (Active/Inactive) */}
         <div>
-          <label className="block text-gray-700 dark:text-gray-300 font-medium mb-1">Status</label>
+          <label className="block text-gray-700 dark:text-gray-300 font-medium mb-1">
+            Status
+          </label>
           <select
+            name="status" // Ensure the name attribute is set
             className="w-full p-2 border rounded-lg dark:bg-gray-900 dark:border-gray-600 dark:text-white focus:outline-none focus:ring focus:ring-purple-500"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
+            value={categoryData.status} // Assuming categoryData is the state object
+            onChange={handleChange}
           >
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
           </select>
         </div>
 
+
         {/* Feature Image Upload */}
         <div>
           <label className="block text-gray-700 dark:text-gray-300 font-medium mb-1">Feature Image</label>
           <input
             type="file"
+            name="featureImage"
             className="w-full p-2 border rounded-lg dark:bg-gray-900 dark:border-gray-600 dark:text-white focus:outline-none focus:ring focus:ring-purple-500"
-            onChange={handleImageUpload}
+            onChange={handleFileChange}
           />
-          {featureImage && <p className="text-gray-500 text-sm mt-1">Selected: {featureImage.name}</p>}
+          {categoryData.featureImage && <p className="text-gray-500 text-sm mt-1">Selected: {categoryData.featureImage.name}</p>}
         </div>
 
         {/* Submit Button */}
