@@ -12,7 +12,11 @@ export const fetchCategories = createAsyncThunk("categories/fetch", async () => 
 
 // 🔹 Create a new category
 export const createCategory = createAsyncThunk("categories/create", async (categoryData) => {
-  const response = await axios.post(API_URL, categoryData);
+  console.log(categoryData);
+  
+  const response = await axios.post(API_URL, categoryData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
   return response.data;
 });
 
