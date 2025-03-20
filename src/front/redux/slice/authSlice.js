@@ -6,7 +6,7 @@ const API_URL = "http://localhost:5000/api";
 // **Login User and Set Cookie**
 export const loginUser = createAsyncThunk("loginUser", async (credentials, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${API_URL}/auth/login`, credentials, { withCredentials: true }); // 🔥 Backend sets HTTP-only cookie
+    const response = await axios.post(`${API_URL}/auth/login`, credentials, { withCredentials: true }); 
     // const response = await axios.get(`${API_URL}/user`, { withCredentials: true }); // Fetch user after login
     return response.data;
   } catch (error) {
@@ -16,7 +16,7 @@ export const loginUser = createAsyncThunk("loginUser", async (credentials, { rej
 // **Login User and Set Cookie**
 export const registerUser = createAsyncThunk("registerUser", async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/register`, credentials, { withCredentials: true }); // 🔥 Backend sets HTTP-only cookie
+      const response = await axios.post(`${API_URL}/auth/register`, credentials, { withCredentials: true });
       // const response = await axios.get(`${API_URL}/user`, { withCredentials: true }); // Fetch user after login
       return response.data;
     } catch (error) {
